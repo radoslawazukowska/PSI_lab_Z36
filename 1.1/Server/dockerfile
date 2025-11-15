@@ -1,0 +1,5 @@
+FROM gcc:4.9
+COPY . /Server
+WORKDIR /Server/
+RUN gcc -o udp_server1 udp_server.c
+CMD ["./udp_server1"]
