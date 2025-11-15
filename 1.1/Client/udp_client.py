@@ -10,7 +10,7 @@ sizes = [2, 4, 8, 16, 32]
 
 if  len(sys.argv) < 3: 
     print("no port and/or host, using localhost:5005")
-    port=5005
+    port=8000
     host=HOST
 else:
     host = sys.argv[1]
@@ -23,6 +23,7 @@ for size in sizes:
         message = bytes()
         start = time.process_time()
         data = sock.sendto(message, (host, port))
+        recv = sock.recvfrom()
         finish = time.process_time()
         times[size] = (finish - start)
     except Exception:
