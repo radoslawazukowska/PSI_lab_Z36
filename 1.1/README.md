@@ -8,8 +8,11 @@ Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Kl
 `git clone https://github.com/radoslawazukowska/PSI_lab_Z36.git`
 3. Przejdź do folder tego zadania \
 `cd PSI_lab_Z36/1.1`
-4. Uruchom server [ TODO ]
-5. Uruchom klienta \
+4. Uruchom server \
+`cd Server` \
+`docker build -t server1_docker .` \
+`docker run -it --network z36_network cs_network --name cserver1 server1_docker:latest`
+5. Na osobnym terminalu uruchom klienta \
 `cd Client` \
 `docker build -t pclient1 .` \
 `docker run -it --network z36_network pclient1 cserver1 8001`
