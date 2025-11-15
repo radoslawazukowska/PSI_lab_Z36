@@ -3,13 +3,15 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
+#define resp "this is some confirmation"
+
 void main(void)
 {
     int sock, length;
     struct sockaddr_in name;
     char buf[1024];
 
-    sock = socker(AF_INET, SOCK_DGRAM, 0);
+    sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock == -1) {
         perror("opening datagram socket");
         exit(1);
@@ -38,6 +40,12 @@ void main(void)
         exit(2);
     }
     printf("-->%s\n", buf);
+    /* Sending a confirmation. */
+    if ( sendto(sock, resp, sizeof resp, 0,
+        (struct sockaddr *) &name, sizeof name) == -1) {
+        perror("receiving datagram packet");
+    }
+    printf("sent confirmation\n");
     close(sock);
     exit(0);
 }
