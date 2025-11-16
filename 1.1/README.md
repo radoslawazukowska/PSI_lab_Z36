@@ -19,3 +19,7 @@ Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Kl
 6. Jeśli chcesz ponownie uruchomić program z punktu 4 i 5, najpierw usuń odpowiednie kontenery Dockerowe \
 `docker container rm cserver1` \
 `docker container rm pclient1`
+
+### Ewentualne problemy
+1. Na bigubu tego nie ma, ale lokalnie upewnij się że masz uruchomiony Docker, inaczej polecenia nie zadziałają.
+2. Serwer można zatrzymać sekwencją klawiszy Ctrl-p/Ctrl-q albo jeśli to nie działa to osobny terminal i `docker stop cserver1`.
