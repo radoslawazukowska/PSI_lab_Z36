@@ -4,14 +4,13 @@
 #include <stdio.h>
 
 #define resp "this is some confirmation"
-#define DEFAULT_PORT 8001
 
 void main(void)
 {
     int sock, length;
     struct sockaddr_in server, client;
     socklen_t client_len;
-    char buf[1024];
+    char buf[20000];
 
     sock = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -45,7 +44,7 @@ void main(void)
                         (struct sockaddr*) &client, &client_len);
         
         buf[n] = '\0';
-        printf("-->%s\n", buf);
+        //printf("-->%s\n", buf); // This prints the received data, so uncomment if you want to see it
         /* Sending a confirmation. */
         if ( sendto(sock, resp, sizeof resp, 0,
             (struct sockaddr *) &client, sizeof(client)) == -1) {
