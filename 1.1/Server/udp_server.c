@@ -3,7 +3,7 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
-#define resp "this is some confirmation"
+#define RESP "this is some confirmation"
 
 void main(void)
 {
@@ -44,9 +44,10 @@ void main(void)
                         (struct sockaddr*) &client, &client_len);
         
         buf[n] = '\0';
+        printf("From port #%d --> %d\n", ntohs(client.sin_port), n);
         //printf("-->%s\n", buf); // This prints the received data, so uncomment if you want to see it
         /* Sending a confirmation. */
-        if ( sendto(sock, resp, sizeof resp, 0,
+        if ( sendto(sock, RESP, sizeof RESP, 0,
             (struct sockaddr *) &client, sizeof(client)) == -1) {
             perror("receiving datagram packet");
         }
