@@ -10,7 +10,7 @@ void main(void)
     int sock, length;
     struct sockaddr_in server, client;
     socklen_t client_len;
-    char buf[20000];
+    char buf[66000];
 
     sock = socket(AF_INET, SOCK_DGRAM, 0);
 
