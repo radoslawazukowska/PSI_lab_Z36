@@ -4,7 +4,7 @@ import time
 
 HOST = '127.0.0.1'  # The server's hostname or IP address
 times = {}
-sizes = [2, 4, 8, 16, 32]
+sizes = [2048, 4096, 8192, 9000, 15000, 20000]
 
 print("This is UDP client!!!")
 
