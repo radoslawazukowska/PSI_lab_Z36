@@ -15,7 +15,7 @@ Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Kl
 5. Na osobnym terminalu uruchom klienta \
 `cd Client` \
 `docker build -t pclient1 .` \
-`docker run -it --network z36_network --name pclient1 pclient1 cserver1 <server_port>`
+`docker run -it --network z36_network --name pclient1 pclient1 cserver1 54070`
 6. Jeśli chcesz ponownie uruchomić program z punktu 4 i 5, najpierw usuń odpowiednie kontenery Dockerowe \
 `docker container rm cserver1` \
 `docker container rm pclient1`
