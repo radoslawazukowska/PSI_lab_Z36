@@ -21,6 +21,7 @@ else:
 print('Starting experiment')
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+    s.bind(("0.0.0.0", 5000))
     for size in sizes:
         try:
             message = b"x" * size
@@ -29,9 +30,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             data, addr = s.recvfrom(4096)
             finish = time.perf_counter()
             times[size] = (finish - start)
-            print(f'For size of {size}B it took {time[size]}s to get answer')
-        except Exception:
+            print(f'For size of {size}B it took {times[size]}s to get answer')
+        except Exception as e:
             print(f"Failed for {size}B")
+            print(e)
             break
 
 print('Client finished.')
