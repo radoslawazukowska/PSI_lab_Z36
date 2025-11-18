@@ -8,15 +8,19 @@ Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Kl
 `git clone https://github.com/radoslawazukowska/PSI_lab_Z36.git`
 3. Przejdź do folder tego zadania \
 `cd PSI_lab_Z36/1.1`
-4. Uruchom server \
+4. Uruchom skrypt run.sh \
+`sh run.sh`
+
+### Opis, co robi skrypt lub instrukcja ręcznego uruchomienia:
+1. Uruchom server \
 `cd Server` \
 `docker build -t server1_docker .` \
 `docker run -it --network z36_network --network-alias cserver1 --name cserver1 server1_docker:latest`
-5. Na osobnym terminalu uruchom klienta \
+2. Na osobnym terminalu uruchom klienta \
 `cd Client` \
 `docker build -t pclient1 .` \
 `docker run -it --network z36_network --name pclient1 pclient1 cserver1 54070`
-6. Jeśli chcesz ponownie uruchomić program z punktu 4 i 5, najpierw usuń odpowiednie kontenery Dockerowe \
+3. Jeśli chcesz ponownie uruchomić program z punktu 4 i 5, najpierw usuń odpowiednie kontenery Dockerowe \
 `docker container rm cserver1` \
 `docker container rm pclient1`
 
