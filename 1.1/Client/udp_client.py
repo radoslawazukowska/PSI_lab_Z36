@@ -20,6 +20,7 @@ actions = {
 def save_times(filename, times, sizes):
     with open(filename, "w") as f:
         json.dump({"sizes": sizes, "times": times}, f)
+    print("Times saved")
 
 
 if __name__ == "__main__":
@@ -61,4 +62,4 @@ if __name__ == "__main__":
                 break
     print("Client finished.")
 
-    save_times("z36_dgram_times.json", times, dgram_sizes)
+    save_times("/app/z36_dgram_times.json", times, dgram_sizes)
