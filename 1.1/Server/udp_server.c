@@ -33,7 +33,6 @@ void main(void)
         exit(1);
     }
 
-    // socklen_t slength = sizeof(server);
     if (getsockname(sock, (struct sockaddr *)&server, &server_len) == -1)
     {
         perror("getting socket name");
@@ -45,13 +44,12 @@ void main(void)
     while (1)
     {
         /* Read from the socket. */
-        // client_len = sizeof(client);
         int n = recvfrom(sock, buf, sizeof(buf), 0,
                          (struct sockaddr *)&client, &client_len);
 
         buf[n] = '\0';
         printf("From port #%d --> %d\n", ntohs(client.sin_port), n);
-        // printf("-->%s\n", buf); // This prints the received data, so uncomment if you want to see it
+
         /* Sending a confirmation. */
         if (sendto(sock, RESP, sizeof RESP, 0,
                    (struct sockaddr *)&client, sizeof(client)) == -1)

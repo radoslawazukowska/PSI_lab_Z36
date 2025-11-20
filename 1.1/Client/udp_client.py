@@ -6,7 +6,6 @@ import json
 HOST = "127.0.0.1"
 BUFSIZE = 4096
 START_SIZE = 2
-# PORT = 8000
 INCR = "mul"
 
 actions = {
@@ -27,15 +26,20 @@ if __name__ == "__main__":
     print("This is UDP client.")
 
     if len(sys.argv) < 3:
-        print("no port and/or host, using localhost:5005")
+        print("no port and/or host, using localhost:8000")
         port = 8000
         host = HOST
     else:
         host = sys.argv[1]
         port = int(sys.argv[2])
 
-    start_size = START_SIZE
-    incr_action = actions[INCR]
+    # Parametry dla wygdniejszego uruchamiania do pomiarów
+    if len(sys.arg == 4):
+        start_size = int(sys.argv[3])
+        incr_action = sys.argv[4]
+    else:
+        start_size = START_SIZE
+        incr_action = actions[INCR]
 
     times = []
     dgram_sizes = []
@@ -62,4 +66,6 @@ if __name__ == "__main__":
                 break
     print("Client finished.")
 
-    save_times("/app/z36_dgram_times.json", times, dgram_sizes)
+    save_times(
+        f"/app/z36_dgram_times_{start_size}_{incr_action}.json", times, dgram_sizes
+    )
