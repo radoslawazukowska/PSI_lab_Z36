@@ -10,7 +10,7 @@ void main(void)
 {
     int sock, length;
     struct sockaddr_in server, client;
-    socklen_t client_len = sizeof(client);
+    socklen_t client_len = sizeof(client); // skąd to
     socklen_t server_len = sizeof(server);
     char buf[66000]; // WArtość większa niż maksymalna wiadomość
 
@@ -27,7 +27,7 @@ void main(void)
     server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = ntohs(SERVER_PORT);
 
-    if (bind(sock, (struct sockaddr *)&server, &server_len) == -1)
+    if (bind(sock, (struct sockaddr *)&server, sizeof server) == -1)
     {
         perror("binding datagram socket");
         exit(1);
@@ -53,7 +53,6 @@ void main(void)
         buf[n] = '\0';
         printf("From port #%d --> %d\n", ntohs(client.sin_port), n);
         // printf("-->%s\n", buf); // This prints the received data, so uncomment if you want to see it
-
         /* Sending a confirmation. */
         if (sendto(sock, RESP, sizeof RESP, 0,
                    (struct sockaddr *)&client, sizeof(client)) == -1)
