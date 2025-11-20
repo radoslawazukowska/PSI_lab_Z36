@@ -21,7 +21,7 @@ actions = {
 def save_times(filename, times, sizes, params):
     with open(filename, "w") as f:
         json.dump({"sizes": sizes, "times": times, "params": params}, f)
-    print("Times saved")
+    print(f"Times saved into {filename}")
 
 
 if __name__ == "__main__":
