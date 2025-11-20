@@ -7,8 +7,8 @@ HOST = "127.0.0.1"
 BUFSIZE = 4096
 START_SIZE = 2
 INCR = "add100"
-FILEPATH = "/app/z36_dgram_times_100"
-REPEATS = 20
+FILEPATH = "/app/z36_dgram_times"
+REPEATS = 10
 
 actions = {
     "inc": lambda x: x + 1,
@@ -18,9 +18,9 @@ actions = {
 }
 
 
-def save_times(filename, times, sizes):
+def save_times(filename, times, sizes, params):
     with open(filename, "w") as f:
-        json.dump({"sizes": sizes, "times": times}, f)
+        json.dump({"sizes": sizes, "times": times, "params": params}, f)
     print("Times saved")
 
 
@@ -70,4 +70,13 @@ if __name__ == "__main__":
                 break
     print("Client finished.")
 
-    save_times(f"{FILEPATH}.json", times, dgram_sizes)
+    # Parametry do wykresu
+    params = {
+        "host": host,
+        "port": port,
+        "start_size": start_size,
+        "incr_action": INCR,
+        "repeats": REPEATS,
+    }
+    filename = f"{FILEPATH}_{INCR}_{REPEATS}.json"
+    save_times(filename, times, dgram_sizes, params)
