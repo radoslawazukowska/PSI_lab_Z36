@@ -27,7 +27,7 @@ create --name z43_serwer_app1 --network z43_network
 2. Na osobnym terminalu uruchom klienta \
    `cd Client` \
    `docker build -t z36_pclient1 .` \
-   `docker run -it --network z36_network --name z36_pclient1 pclient1 cserver1 54070`
+   `docker run -it --network z36_network --name z36_pclient1 z36_pclient1 z36_cserver1 54070`
 3. Jeśli chcesz ponownie uruchomić program z punktu 4 i 5, najpierw usuń odpowiednie kontenery Dockerowe \
    `docker container rm z36_cserver1` \
    `docker container rm z36_pclient1`
@@ -35,4 +35,4 @@ create --name z43_serwer_app1 --network z43_network
 ### Ewentualne problemy
 
 1. Na bigubu tego nie ma, ale lokalnie upewnij się że masz uruchomiony Docker, inaczej polecenia nie zadziałają.
-2. Serwer można opuścić sekwencją klawiszy Ctrl-p/Ctrl-q, jednak przed usunięciem jego potrzebne jest zatrzymanie używając następującego polecenia: `docker stop cserver1`.
+2. Serwer można opuścić sekwencją klawiszy Ctrl-p/Ctrl-q, jednak przed usunięciem jego potrzebne jest zatrzymanie używając następującego polecenia: `docker stop z36_cserver1`.
