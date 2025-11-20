@@ -7,8 +7,8 @@ HOST = "127.0.0.1"
 BUFSIZE = 4096
 START_SIZE = 2
 INCR = "add100"
-FILEPATH = "/app/z36_dgram_times_1"
-REPEATS = 10
+FILEPATH = "/app/z36_dgram_times_100"
+REPEATS = 20
 
 actions = {
     "inc": lambda x: x + 1,
