@@ -1,12 +1,33 @@
 #!/bin/bash
 
-cd Server
-docker build -t server1_docker .
-docker run -dit --network z36_network --network-alias cserver1 --name cserver1 server1_docker:latest
-cd ..
-cd Client
-docker build -t pclient1 .
-docker run -it --network z36_network --name pclient1 pclient1 cserver1 54070
-docker stop cserver1
-docker container rm cserver1
-docker container rm pclient1
+USER_NAME="$USER"
+
+SERVER_CONTAINER="z36_cserver1"
+SERVER_IMAGE="z36_server1_docker:latest"
+CLIENT_CONTAINER="z36_pclient1"
+CLIENT_IMAGE="z36_pclient1"
+
+CLIENT_LOCAL_PATH="/home/users/$USER_NAME/PSI_lab_Z36/1.1/Client"
+
+# Usunięcie kontenera, jeśli istnieje
+remove_container() {
+    if [ $(docker ps -a -q -f name=$1) ]; then
+        echo "Removing existing container $1..."
+        docker rm -f $1
+    fi
+}
+
+remove_container $SERVER_CONTAINER
+remove_container $CLIENT_CONTAINER
+
+docker build -t $SERVER_IMAGE ./Server
+docker build -t $CLIENT_IMAGE ./Client
+
+# Uruchomienie serwera w tle
+docker run -it --network z36_network --network-alias z36_cserver1 --name $SERVER_CONTAINER $SERVER_IMAGE > server.log 2>&1 &
+sleep 2
+
+# Uruchomienie klienta w tym samym terminalu
+docker run -it --network z36_network --name $CLIENT_CONTAINER -v $CLIENT_LOCAL_PATH:/app $CLIENT_IMAGE z36_cserver1 54070
+
+echo "Server and client started."
