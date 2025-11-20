@@ -7,6 +7,9 @@ Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Kl
 z36
 create --name z43_serwer_app1 --network z43_network
 
+Sprawdzić czy kontenr jeszcze jest
+`docker ps -a --filter name='z36_'`
+
 ## Uruchamianie
 
 1. Zaloguj się do bigubu \

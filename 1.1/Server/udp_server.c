@@ -10,9 +10,9 @@ void main(void)
 {
     int sock, length;
     struct sockaddr_in server, client;
-    socklen_t client_len = sizeof(client); // skąd to
+    socklen_t client_len = sizeof(client);
     socklen_t server_len = sizeof(server);
-    char buf[66000]; // WArtość większa niż maksymalna wiadomość
+    char buf[66000];
 
     sock = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -34,7 +34,6 @@ void main(void)
     }
 
     // socklen_t slength = sizeof(server);
-    // if (getsockname(sock, (struct sockaddr *)&server, &slength) == -1)
     if (getsockname(sock, (struct sockaddr *)&server, &server_len) == -1)
     {
         perror("getting socket name");
