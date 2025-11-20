@@ -24,7 +24,7 @@ Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Kl
    `docker build -t z36_pclient1 .` \
    `docker run -it --network z36_network --name z36_pclient1 z36_pclient1 z36_cserver1 54070`
    <br>
-   Aby mieć dostęp do wyników w formacie `json` dodaj do poprzedniej komendy `-v /home/users/<yourname>/PSI_lab_Z36/1.1/Client:/app `
+   Aby mieć dostęp do wyeksportowanych wyników w formacie `json` dodaj do poprzedniej komendy `-v /home/users/<yourname>/PSI_lab_Z36/1.1/Client:/app `
 
 3. Jeśli chcesz ponownie uruchomić program, najpierw usuń odpowiednie kontenery Dockerowe \
    `docker container rm z36_cserver1` \
