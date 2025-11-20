@@ -34,7 +34,7 @@ if __name__ == "__main__":
         port = int(sys.argv[2])
 
     # Parametry dla wygdniejszego uruchamiania do pomiarów
-    if len(sys.argv == 4):
+    if len(sys.argv) == 4:
         start_size = int(sys.argv[3])
         incr_action = sys.argv[4]
     else:
