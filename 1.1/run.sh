@@ -26,11 +26,9 @@ docker build -t $CLIENT_IMAGE ./Client
 # Uruchomienie serwera w tle
 docker run -d --network z36_network --network-alias z36_cserver1 --name $SERVER_CONTAINER $SERVER_IMAGE
 
-# Poczekaj, aż serwer wystartuje
+# Czekamy aż serwer wystartuje
 sleep 10
 
-# Uruchomienie klienta
+# Uruchomienie klienta w bieżącym terminalu
 docker run -it --network z36_network --name $CLIENT_CONTAINER -v $CLIENT_LOCAL_PATH:/app $CLIENT_IMAGE z36_cserver1 54070
 
-
-echo "Server and client started."

@@ -44,7 +44,7 @@ def create_plot(filename, sizes, times, params=None):
 
 
 if __name__ == "__main__":
-    datafile = "z36_dgram_times_add100_10.json"
-    plotfile = "z36_dgram_times_add100_10.png"
+    datafile = "z36_dgram_times_add100_100.json"
+    plotfile = "z36_dgram_times_add100_100.png"
     sizes, times, params = load_times(datafile)
     create_plot(plotfile, sizes, times, params)

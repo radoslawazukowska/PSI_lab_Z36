@@ -2,14 +2,6 @@
 
 Klient wysyła, a serwer odbiera datagramy oraz odsyła ustaloną odpowiedź. Klient powinien wysyłać kolejne datagramy o przyrastającej wielkości, tj. 2, 4, 8, 16, 32, itd. bajtów. Ustalić eskperymentalnie z dokładnością do jednego bajta jak duży datagram jest obsługiwany. Wyjaśnić. Zmierzyć czas pomiędzy wysłaniem wiadomości a odebraniem odpowiedzi po stronie klienta i zestawić wyniki na wykresie.
 
-# Ważne
-
-z36
-create --name z43_serwer_app1 --network z43_network
-
-Sprawdzić czy kontenr jeszcze jest
-`docker ps -a --filter name='z36_'`
-
 ## Uruchamianie
 
 1. Zaloguj się do bigubu \
@@ -30,8 +22,9 @@ Sprawdzić czy kontenr jeszcze jest
 2. Na osobnym terminalu uruchom klienta \
    `cd Client` \
    `docker build -t z36_pclient1 .` \
-   `docker run -it --network z36_network --name z36_pclient1 z36_pclient1 z36_cserver1 54070`
-3. Jeśli chcesz ponownie uruchomić program z punktu 4 i 5, najpierw usuń odpowiednie kontenery Dockerowe \
+   `docker run -it --network z36_network --name z36_pclient1 -v /home/users/<yourname>/PSI_lab_Z36/1.1/Client:/app z36_pclient1 z36_cserver1 54070`
+
+3. Jeśli chcesz ponownie uruchomić program, najpierw usuń odpowiednie kontenery Dockerowe \
    `docker container rm z36_cserver1` \
    `docker container rm z36_pclient1`
 
