@@ -7,6 +7,7 @@ HOST = "127.0.0.1"
 BUFSIZE = 4096
 START_SIZE = 2
 INCR = "mul"
+FILEPATH = "/app/z36_dgram_times_1"
 
 actions = {
     "inc": lambda x: x + 1,
@@ -61,6 +62,4 @@ if __name__ == "__main__":
                 break
     print("Client finished.")
 
-    save_times(
-        f"/app/z36_dgram_times_{start_size}_{incr_action}.json", times, dgram_sizes
-    )
+    save_times(f"{FILEPATH}.json", times, dgram_sizes)
