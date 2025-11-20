@@ -33,13 +33,8 @@ if __name__ == "__main__":
         host = sys.argv[1]
         port = int(sys.argv[2])
 
-    # Parametry dla wygdniejszego uruchamiania do pomiarów
-    if len(sys.argv) == 4:
-        start_size = int(sys.argv[3])
-        incr_action = sys.argv[4]
-    else:
-        start_size = START_SIZE
-        incr_action = actions[INCR]
+    start_size = START_SIZE
+    incr_action = actions[INCR]
 
     times = []
     dgram_sizes = []
