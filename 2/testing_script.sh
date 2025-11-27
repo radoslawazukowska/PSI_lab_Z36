@@ -1,12 +1,10 @@
 #!/bin/bash
 
-docker network create z36_network # !LOKALNIE!
-
 cd Server
 docker build -t tcp_server_image .
 docker run -dit --network z36_network --name server tcp_server_image:latest
 
-sleep(2)
+sleep 2
 
 cd ../Client
 docker build -t tcp_parallel_clients_image .
