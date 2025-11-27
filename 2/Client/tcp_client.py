@@ -24,7 +24,7 @@ if __name__ == '__main__':
     else:
         MESSAGE = sys.argv[3]
 
-    print(f"Sending message '{MESSAGE}' to {HOST}:{PORT}")
+    # print(f"Sending message '{MESSAGE}' to {HOST}:{PORT}")
 
     start = time.perf_counter()
 
@@ -39,4 +39,4 @@ if __name__ == '__main__':
     t = time.perf_counter() - start
 
     # print("Received:", data.decode())
-    print(f"Client finished in {t} s.")
+    print(f"Client finished in {t} s. Message: {MESSAGE} Response: {data}")
