@@ -20,6 +20,13 @@ remove_container $SERVER_CONTAINER
 remove_container $CLIENT_CONTAINER
 
 docker build -t $SERVER_IMAGE ./Server
+docker build -t $CLIENT_IMAGE ./Client
 
 # Uruchomienie serwera w tle
 docker run -dit --network z36_network --network-alias z36_cserver1 --name $SERVER_CONTAINER $SERVER_IMAGE
+
+# Czekamy aż serwer wystartuje
+sleep 10
+
+# Uruchomienie klienta w bieżącym terminalu
+docker run -it --network z36_network --name $CLIENT_CONTAINER $CLIENT_IMAGE z36_cserver1
