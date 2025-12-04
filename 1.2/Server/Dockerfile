@@ -1,3 +1,6 @@
 FROM python:3
-ADD udp_server.py /
-ENTRYPOINT [ "python", "./udp_server.py"]
+
+WORKDIR /app
+COPY udp_server.py .
+
+ENTRYPOINT [ "python", "udp_server.py"]

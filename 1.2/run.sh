@@ -3,9 +3,7 @@
 USER_NAME="$USER"
 
 SERVER_CONTAINER="z36_pserver1"
-SERVER_IMAGE="z36_pserver1:latest"
 CLIENT_CONTAINER="z36_cclient1"
-CLIENT_IMAGE="z36_cclient1"
 
 CLIENT_LOCAL_PATH="/home/users/$USER_NAME/PSI_lab_Z36/1.2/Client"
 
@@ -25,14 +23,4 @@ remove_container() {
 remove_container $SERVER_CONTAINER
 remove_container $CLIENT_CONTAINER
 
-docker build -t $SERVER_IMAGE ./Server
-docker build -t $CLIENT_IMAGE ./Client
-
-# Uruchomienie serwera w tle
-docker run -dit --network z36_network --network-alias z36_pserver1 --name $SERVER_CONTAINER $SERVER_IMAGE
-
-# Czekamy aż serwer wystartuje
-sleep 10
-
-# Uruchomienie klienta w bieżącym terminalu
-docker run -it --network z36_network --name $CLIENT_CONTAINER -v $CLIENT_LOCAL_PATH:/input $CLIENT_IMAGE z36_pserver1 8080 /input/$FILE_NAME
+docker compose up --build
