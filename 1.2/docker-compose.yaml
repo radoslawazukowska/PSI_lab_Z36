@@ -13,8 +13,6 @@ services:
     tty: true
     cap_add:
       - NET_ADMIN
-    depends_on:
-      - server
     volumes:
       - ./Client:/input
     command: ["z36_pserver1", "8080", "/input/file.bin"]
