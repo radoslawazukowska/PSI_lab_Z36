@@ -79,14 +79,25 @@ int main(int argc, char *argv[]) {
   }
 
   size_t nread;
-  while ((nread = fread(packet_data_buf, 1, PACKAGE_SIZE, fptr)) > 0) {
-    memcpy(file_data + seq_num * PACKAGE_SIZE, packet_data_buf, nread);
+  short more_packages_to_send = 1;
+  while (more_packages_to_send) {
     int netseq = htonl(seq_num);
     memcpy(packet_with_ack, &netseq, ACK_SIZE);
-    memcpy(packet_with_ack + ACK_SIZE, packet_data_buf, nread);
+
+    nread = fread(packet_data_buf, 1, PACKAGE_SIZE, fptr);
+    if (nread > 0) {
+      memcpy(file_data + seq_num * PACKAGE_SIZE, packet_data_buf, nread);
+      memcpy(packet_with_ack + ACK_SIZE, packet_data_buf, nread);
+    } else {
+      more_packages_to_send = 0;
+    }
 
     while (1) {
-      printf("Sending %d package to the server...\n", seq_num);
+      if (nread == 0) {
+        printf("Sending EOF package to the server...\n");
+      } else {
+        printf("Sending %d package to the server...\n", seq_num);
+      }
 
       if (send(sock, packet_with_ack, nread + ACK_SIZE, 0) < 0) {
         perror("send");
@@ -108,11 +119,6 @@ int main(int argc, char *argv[]) {
     memset(packet_data_buf, 0, sizeof(packet_data_buf));
     usleep(200000);
   }
-  int netseq = htonl(seq_num);
-  printf("Sending EOF package to the server...\n");
-  if (send(sock, &netseq, ACK_SIZE, 0) < 0)
-    perror("EOF send");
-
   char hash_hex[SHA256_DIGEST_LENGTH * 2 + 1];
   compute_sha256(file_data, FILE_SIZE, hash_hex);
 
