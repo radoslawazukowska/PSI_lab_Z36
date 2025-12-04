@@ -26,13 +26,18 @@ if __name__ == "__main__":
 
                 print(f"Received seq={seq_num} from {address}, payload_len={len(packet_data)}")
 
+                if len(packet_data) == 0:
+                    if seq_num == expected_seq_num:
+                        print("EOF received correctly")
+                        s.sendto(struct.pack("!I", seq_num), address)
+                        break
+                    else:
+                        print(f"EOF received with wrong seq={seq_num}, expected={expected_seq}")
+                        s.sendto(struct.pack("!I", seq_num), address)
+                        continue
+
                 if seq_num == expected_seq_num:
                     s.sendto(struct.pack('!I', seq_num), address)
-
-                    if len(packet_data) == 0:
-                        print("EOF received")
-                        break
-
                     received_data.extend(packet_data)
                     expected_seq_num += 1
                 elif seq_num < expected_seq_num:

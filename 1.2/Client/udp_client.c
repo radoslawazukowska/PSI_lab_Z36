@@ -108,10 +108,23 @@ int main(int argc, char *argv[]) {
     memset(packet_data_buf, 0, sizeof(packet_data_buf));
     usleep(200000);
   }
+
   int netseq = htonl(seq_num);
-  printf("Sending EOF package to the server...\n");
-  if (send(sock, &netseq, ACK_SIZE, 0) < 0)
-    perror("EOF send");
+  printf("Sending EOF seq=%d...\n", seq_num);
+
+  while (1) {
+      send(sock, &netseq, ACK_SIZE, 0);
+      if (recv(sock, received_ack_buf, ACK_SIZE, 0) >= 0) {
+        int ack_seq;
+        memcpy(&ack_seq, received_ack_buf, ACK_SIZE);
+        if (ntohl(ack_seq) == seq_num) {
+          printf("Received correct EOF ACK from server.\n");
+          break;
+        }
+      }
+      printf("Timeout / wrong ACK for EOF, retrying...\n");
+      usleep(200000);
+    }
 
   char hash_hex[SHA256_DIGEST_LENGTH * 2 + 1];
   compute_sha256(file_data, FILE_SIZE, hash_hex);
