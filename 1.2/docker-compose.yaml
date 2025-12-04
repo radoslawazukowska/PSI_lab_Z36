@@ -1,0 +1,23 @@
+services:
+
+  server:
+    container_name: z36_pserver1
+    build: ./Server
+    tty: true
+    cap_add:
+      - NET_ADMIN
+
+  client:
+    container_name: z36_cclient1
+    build: ./Client
+    tty: true
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./Client:/input
+    command: ["z36_pserver1", "8080", "/input/file.bin"]
+
+networks:
+  default:
+    name: z36_network
+    external: true
