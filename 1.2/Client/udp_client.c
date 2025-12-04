@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define _USE_RESOLVER
+#define USE_RESOLVER
 #define DEFAULT_SRV_IP "127.0.0.1"
 
 #define FILE_SIZE 10000
@@ -86,14 +86,14 @@ int main(int argc, char *argv[]) {
     memcpy(packet_with_ack + ACK_SIZE, packet_data_buf, nread);
 
     while (1) {
-      printf("Sending %d package to the server...", seq_num);
+      printf("Sending %d package to the server...\n", seq_num);
 
       if (send(sock, packet_with_ack, nread + ACK_SIZE, 0) < 0) {
         perror("send");
         continue;
       }
       if (recv(sock, received_ack_buf, ACK_SIZE, 0) < 0) {
-        printf("Timeout, packet lost. Trying once again...");
+        printf("Timeout, packet lost. Trying once again...\n");
         continue;
       }
       int ack_seq;
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
       if (ntohl(ack_seq) == seq_num) {
         break;
       } else {
-        printf("Wrong ACK. Trying once again...");
+        printf("Wrong ACK. Trying once again...\n");
       }
     }
     seq_num++;
@@ -114,8 +114,8 @@ int main(int argc, char *argv[]) {
   char hash_hex[SHA256_DIGEST_LENGTH * 2 + 1];
   compute_sha256(file_data, FILE_SIZE, hash_hex);
 
-  printf("Client streaming ended");
-  printf("Client's hash: %s", hash_hex);
+  printf("Client streaming ended\n");
+  printf("Client's hash: %s\n", hash_hex);
 
   fclose(fptr);
   close(sock);
