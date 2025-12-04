@@ -14,4 +14,10 @@ head -c 10000 /dev/urandom > $CLIENT_LOCAL_PATH/$FILE_NAME
 # Usunięcie kontenera, jeśli istnieje
 docker rm -f $SERVER_CONTAINER $CLIENT_CONTAINER 2>/dev/null || true
 
-docker compose up --build
+docker compose up --build &
+
+# Czekanie aż uruchomi się klient
+sleep 5
+
+# Wprowadzenie zakłóceń
+docker exec z36_cclient1 tc qdisc add dev eth0 root netem delay 1000ms 500ms loss 50%
