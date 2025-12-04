@@ -17,7 +17,5 @@ Klient ma za zadanie odczytać plik z dysku (proszę wygenerować plik z losowym
    `git clone https://github.com/radoslawazukowska/PSI_lab_Z36.git`
 3. Przejdź do folder tego zadania \
    `cd PSI_lab_Z36/1.2`
-4. Jeśli chcesz uruchomić program bez zmiany pliku \
-   `docker compose up` \
-   Jeśli chcesz uruchomić program wraz ze zmianą pliku (restart) \
+4. Uruchom test za pomocą skryptu run.sh \
    `sh run.sh`
