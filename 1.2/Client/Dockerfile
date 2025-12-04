@@ -1,5 +1,8 @@
 FROM gcc:4.9
-COPY . /Client
+
 WORKDIR /app
-RUN gcc -o udp_client udp_client.c -lssl -lcrypto
+COPY . .
+
+RUN gcc -o udp_client udp_client.c -lcrypto
+
 ENTRYPOINT ["./udp_client"]
