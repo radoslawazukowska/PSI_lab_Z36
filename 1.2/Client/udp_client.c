@@ -106,8 +106,10 @@ int main(int argc, char *argv[]) {
     }
     seq_num++;
     memset(packet_data_buf, 0, sizeof(packet_data_buf));
+    usleep(200000);
   }
   int netseq = htonl(seq_num);
+  printf("Sending EOF package to the server...\n");
   if (send(sock, &netseq, ACK_SIZE, 0) < 0)
     perror("EOF send");
 
