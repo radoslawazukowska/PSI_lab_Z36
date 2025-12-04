@@ -8,7 +8,6 @@ BUFSIZE = 66000
 ACK_SIZE = 4
 
 
-
 if __name__ == "__main__":
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.bind((HOST, PORT))
