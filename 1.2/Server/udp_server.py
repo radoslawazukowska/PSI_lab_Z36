@@ -20,8 +20,6 @@ if __name__ == "__main__":
         while True:
             try:
                 message, address = s.recvfrom( BUFSIZE )
-                print(f"Message from Client:{message}")
-                print(f"Client IP Address:{address}")
 
                 packet_data = message[ACK_SIZE:]
                 seq_num = struct.unpack('!I', message[:ACK_SIZE])[0]
