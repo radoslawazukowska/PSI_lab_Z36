@@ -29,10 +29,10 @@ docker build -t $SERVER_IMAGE ./Server
 docker build -t $CLIENT_IMAGE ./Client
 
 # Uruchomienie serwera w tle
-docker run -dit --network z36_network --network-alias z36_cserver1 --name $SERVER_CONTAINER $SERVER_IMAGE
+docker run -dit --network z36_network --network-alias z36_pserver1 --name $SERVER_CONTAINER $SERVER_IMAGE
 
 # Czekamy aż serwer wystartuje
 sleep 10
 
 # Uruchomienie klienta w bieżącym terminalu
-docker run -it --network z36_network --name $CLIENT_CONTAINER -v $CLIENT_LOCAL_PATH:/input $CLIENT_IMAGE z36_cserver1 8888 /input/$FILE_NAME
+docker run -it --network z36_network --name $CLIENT_CONTAINER -v $CLIENT_LOCAL_PATH:/input $CLIENT_IMAGE z36_pserver1 8080 /input/$FILE_NAME
